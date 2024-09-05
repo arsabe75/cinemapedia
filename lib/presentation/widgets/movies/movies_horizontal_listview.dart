@@ -169,11 +169,12 @@ class _Title extends StatelessWidget {
             style: titleStyle,
           ),
           const Spacer(),
-          FilledButton.tonal(
-            style: const ButtonStyle(visualDensity: VisualDensity.compact),
-            onPressed: () {},
-            child: Text(subTitle ?? ''),
-          ),
+          if (subTitle != null)
+            FilledButton.tonal(
+              style: const ButtonStyle(visualDensity: VisualDensity.compact),
+              onPressed: () {},
+              child: Text(subTitle ?? ''),
+            ),
         ],
       ),
     );
