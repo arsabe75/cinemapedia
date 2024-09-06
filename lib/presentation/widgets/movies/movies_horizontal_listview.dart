@@ -60,8 +60,8 @@ class _MoviesHorizontalListviewState extends State<MoviesHorizontalListview> {
               itemCount: widget.movies.length,
               physics: const BouncingScrollPhysics(),
               itemBuilder: (context, index) {
-                final movie = widget.movies[index];
-                return _Slide(movie: movie);
+                //final movie = widget.movies[index];
+                return FadeInRight(child: _Slide(movie: widget.movies[index]));
               },
             ),
           )
