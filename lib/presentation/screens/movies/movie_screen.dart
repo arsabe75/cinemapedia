@@ -105,6 +105,7 @@ class _MovieDetails extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(8),
           child: Wrap(
+            runSpacing: 5,
             children: [
               ...movie.genreIds.map(
                 (gender) => Container(
