@@ -31,4 +31,9 @@ class MoviesRepositoryImpl implements MoviesRepository {
   Future<Movie> getMovieId(String id) {
     return datasource.getMovieId(id);
   }
+
+  @override
+  Future<List<Movie>> searchMovies(String query) {
+    return datasource.searchMovies(query);
+  }
 }
