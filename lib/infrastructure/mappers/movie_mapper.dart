@@ -16,7 +16,7 @@ class MovieMapper {
         popularity: themoviedb.popularity,
         posterPath: (themoviedb.posterPath != '')
             ? 'https://image.tmdb.org/t/p/w500${themoviedb.posterPath}'
-            : 'no-poster', //'https://m.media-amazon.com/images/I/61s8vyZLSzL.jpg',
+            : 'https://www.prokerala.com/movies/assets/img/no-poster-available.webp',
         releaseDate: themoviedb.releaseDate ?? DateTime.now(),
         title: themoviedb.title,
         video: themoviedb.video,
