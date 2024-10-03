@@ -54,7 +54,10 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
         return ListView.builder(
             itemCount: movies.length,
             itemBuilder: (context, index) {
-              return _MovieItem(movie: movies[index]);
+              return _MovieItem(
+                movie: movies[index],
+                onMovieSelected: close,
+              );
             });
       },
     );
@@ -63,64 +66,73 @@ class SearchMovieDelegate extends SearchDelegate<Movie?> {
 
 class _MovieItem extends StatelessWidget {
   final Movie movie;
+  final Function onMovieSelected;
 
-  const _MovieItem({required this.movie});
+  const _MovieItem({
+    required this.movie,
+    required this.onMovieSelected,
+  });
 
   @override
   Widget build(BuildContext context) {
     final textStyles = Theme.of(context).textTheme;
     final size = MediaQuery.of(context).size;
 
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-      child: Row(
-        children: [
-          // Imagen
-          SizedBox(
-            width: size.width * 0.2,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(10),
-              child: Image.network(
-                movie.posterPath,
-                loadingBuilder: (context, child, loadingProgress) =>
-                    FadeIn(child: child),
+    return GestureDetector(
+      onTap: () {
+        onMovieSelected(context, movie);
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+        child: Row(
+          children: [
+            // Imagen
+            SizedBox(
+              width: size.width * 0.2,
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(10),
+                child: Image.network(
+                  movie.posterPath,
+                  loadingBuilder: (context, child, loadingProgress) =>
+                      FadeIn(child: child),
+                ),
               ),
             ),
-          ),
-          const SizedBox(width: 10),
+            const SizedBox(width: 10),
 
-          // Descripción
-          SizedBox(
-            width: (size.width - 40) * 0.7,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  movie.title,
-                  style: textStyles.titleMedium,
-                ),
-                (movie.overview.length > 100)
-                    ? Text(
-                        '${movie.overview.substring(0, 100)}...',
-                      )
-                    : Text(movie.overview),
-                Row(
-                  children: [
-                    Icon(Icons.star_half_outlined,
-                        color: Colors.yellow.shade800),
-                    const SizedBox(width: 5),
-                    Text(
-                      HumanFormats.number(movie.voteAverage, 1),
-                      style: textStyles.bodyMedium!.copyWith(
-                        color: Colors.yellow.shade900,
+            // Descripción
+            SizedBox(
+              width: (size.width - 40) * 0.7,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    movie.title,
+                    style: textStyles.titleMedium,
+                  ),
+                  (movie.overview.length > 100)
+                      ? Text(
+                          '${movie.overview.substring(0, 100)}...',
+                        )
+                      : Text(movie.overview),
+                  Row(
+                    children: [
+                      Icon(Icons.star_half_outlined,
+                          color: Colors.yellow.shade800),
+                      const SizedBox(width: 5),
+                      Text(
+                        HumanFormats.number(movie.voteAverage, 1),
+                        style: textStyles.bodyMedium!.copyWith(
+                          color: Colors.yellow.shade900,
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              ],
+                    ],
+                  )
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
