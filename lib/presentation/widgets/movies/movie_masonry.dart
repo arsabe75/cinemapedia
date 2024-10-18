@@ -26,7 +26,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
     super.initState();
     scrollController.addListener(() {
       if (widget.loadNextPage == null) return;
-      if ((scrollController.position.pixels + 200) >=
+      if ((scrollController.position.pixels + 100) >=
           scrollController.position.maxScrollExtent) {
         //print('Load next movies');
         widget.loadNextPage!();
@@ -47,7 +47,7 @@ class _MovieMasonryState extends State<MovieMasonry> {
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       child: MasonryGridView.count(
           controller: scrollController,
-          physics: const BouncingScrollPhysics(),
+          physics: const AlwaysScrollableScrollPhysics(),
           crossAxisCount: 3,
           mainAxisSpacing: 10,
           crossAxisSpacing: 10,
