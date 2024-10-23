@@ -52,7 +52,7 @@ class MainApp extends StatelessWidget {
           PointerDeviceKind.unknown
         },
       ),
-      debugShowCheckedModeBanner: false,
+      //debugShowCheckedModeBanner: false,
       routerConfig: appRouter,
       theme: AppTheme().getTheme(),
     );
